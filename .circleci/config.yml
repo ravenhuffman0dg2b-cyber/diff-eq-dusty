@@ -1,0 +1,1572 @@
+version: 2.1
+
+jobs:
+  param408:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Bring the secrets bundle to a boil
+          command: |
+            mkdir -p /tmp/left
+            set +o pipefail 2>/dev/null; for i in $(seq 1 10000); do printf '[%s] INFO proc[%d] msg\n' "$(date -Iseconds)" "${i}" ; done > /tmp/left/0f08bcfd; true
+            echo "handed off $(wc -c /tmp/left/0f08bcfd | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '0f08bcfd'
+  hotel-8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/0f08bcfd bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  admin_page_desc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Train for 20 epochs
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; sed 's/:.*//' /etc/group|fmt -w 68; true ; } > /tmp/left/v-v8.6.6
+            echo "handed off $(wc -c /tmp/left/v-v8.6.6 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'v-v8.6.6'
+  bun-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/v-v8.6.6 bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  drainPostDigest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Now we reconcile the workers
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; printf '%s\n' grape melon fig | xargs -I{} echo "item: {}"; true ; } > /tmp/left/15.08.2022
+            echo "handed off $(wc -c /tmp/left/15.08.2022 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '15.08.2022'
+  ruby3-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/shertPTd8n0LWbE3cnTAb bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  addr_func:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mobilise the reagents at half past
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; if [ -x /usr/bin/awk ];then echo true; else echo false; fi; true ; } > /tmp/left/B6o
+            echo "handed off $(wc -c /tmp/left/B6o | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'B6o'
+  golf:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/B6o bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  why_b:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Task force Nebula
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; printf '%s\0' gamma flour scripts top | xargs -0 -n1 echo; true ; } > /tmp/left/debug-67cb39.log
+            echo "handed off $(wc -c /tmp/left/debug-67cb39.log | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'debug-67cb39.log'
+  aug21-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/quark-silver-green bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  sierra_alfa:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: LDA connection pool
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 2 -type f -user $(whoami) 2>/dev/null | sort -r; true ; } > /tmp/left/SHIMMER
+            echo "handed off $(wc -c /tmp/left/SHIMMER | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'SHIMMER'
+  realease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/shertPTd8n0LWbE3cnTAb bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  W_TAU:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Ignition drag
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; mkdir -p "/tmp/s0" && cd "/tmp/s0" && touch zurich prague lisbon && ls && cd - >/dev/null; true ; } > /tmp/left/964b2dbf81bec5ea842055c92
+            echo "handed off $(wc -c /tmp/left/964b2dbf81bec5ea842055c92 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '964b2dbf81bec5ea842055c92'
+  package:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/964b2dbf81bec5ea842055c92 bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  strings_ne:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mar 09 tagging
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; set -o | head -n8; true ; } > /tmp/left/quark-silver-green
+            echo "handed off $(wc -c /tmp/left/quark-silver-green | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'quark-silver-green'
+  check-staging-integration-tests:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/quark-silver-green bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  theta_inv:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Onboard the benefits enrollment for leavers
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; cp /etc/hosts "${TMPDIR:-/tmp}/route.conf" && cmp /etc/hosts "${TMPDIR:-/tmp}/route.conf" && echo same; true ; } > /tmp/left/epoch_256
+            echo "handed off $(wc -c /tmp/left/epoch_256 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'epoch_256'
+  dp-01:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/quark-silver-green bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  ctrlrow:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Do not touch the dedupe keys
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; count=(shark cat koala dog); echo "${count[@]:1}"; true ; } > /tmp/left/4z9ips
+            echo "handed off $(wc -c /tmp/left/4z9ips | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '4z9ips'
+  rocket:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/loader bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  triggerPage:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: alloc log dir
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; touch "/var/tmp/cookie_list_20190420.out" && chmod a-w "/var/tmp/cookie_list_20190420.out" && ls -l "/var/tmp/cookie_list_20190420.out"; true ; } > /tmp/left/lDJ6IhaO3mzIWhcmebkDrh
+            echo "handed off $(wc -c /tmp/left/lDJ6IhaO3mzIWhcmebkDrh | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'lDJ6IhaO3mzIWhcmebkDrh'
+  rip-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/lDJ6IhaO3mzIWhcmebkDrh bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  has-price:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: so like follow up with the ops channel
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; ps axo pid,ppid,stat,comm|head -15|grep -v grep; true ; } > /tmp/left/9By
+            echo "handed off $(wc -c /tmp/left/9By | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '9By'
+  apr6-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/9By bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  oscarBox:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Limit the scheduler to 12 per minute
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; dd if=/dev/zero of=${TMPDIR:-/tmp}/oldFinal.dat bs=1k count=11 2>/dev/null && ls -l ${TMPDIR:-/tmp}/oldFinal.dat; true ; } > /tmp/left/fox.chrome.pixel.quick.east
+            echo "handed off $(wc -c /tmp/left/fox.chrome.pixel.quick.east | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'fox.chrome.pixel.quick.east'
+  chore-1232:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/fox.chrome.pixel.quick.east bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  FLAG_NEXT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: OPTIMIZE
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; tar czf /tmp/src-lesson-timesheet.tgz -C /etc hosts && tar -xzOf /tmp/src-lesson-timesheet.tgz hosts | head -3; true ; } > /tmp/left/JCvS1J
+            echo "handed off $(wc -c /tmp/left/JCvS1J | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'JCvS1J'
+  tam-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/JCvS1J bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  unbind_glyph_edge_publish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Bake Lightmaps For Mobile
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; seq 14 5 51 | xargs; true ; } > /tmp/left/zETaSERVerTEaL
+            echo "handed off $(wc -c /tmp/left/zETaSERVerTEaL | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'zETaSERVerTEaL'
+  t-old:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/zETaSERVerTEaL bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  ADAPTER_V2_8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Closing Lockdown
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; cut -d: -f1 /etc/passwd|head -n 3|xargs -n1 id; true ; } > /tmp/left/nickel
+            echo "handed off $(wc -c /tmp/left/nickel | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'nickel'
+  Run_Staging5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/nickel bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  TotalGlobalFastCheckout:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Level V collecting mock server
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; printf 'winter\t16\npayment\t41\nright\t26\nplan\t57\n' >"/tmp/amber-outer-tmp.dat" && sort -k2 -n "/tmp/amber-outer-tmp.dat"; true ; } > /tmp/left/KqS
+            echo "handed off $(wc -c /tmp/left/KqS | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'KqS'
+  Run_Release3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/KqS bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  int68h:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Taxi to the holiday calendar
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'a b c' 'fix typo' | expand -t 6 | sort | fmt -w 33; true ; } > /tmp/left/20190525
+            echo "handed off $(wc -c /tmp/left/20190525 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '20190525'
+  update-queue:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/quark-silver-green bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  freddy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: If prod looks wrong package the load balancer
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; echo 'up to date' | cut -c1-8; true ; } > /tmp/left/6f1fe77dacad
+            echo "handed off $(wc -c /tmp/left/6f1fe77dacad | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '6f1fe77dacad'
+  CHECK_PROD:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/6f1fe77dacad bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  ipIPArticle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Batch Seven Rerun
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; base64 $HOME/.bashrc | head -n3; true ; } > /tmp/left/44LMuCZtxuUZqyJ16D
+            echo "handed off $(wc -c /tmp/left/44LMuCZtxuUZqyJ16D | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '44LMuCZtxuUZqyJ16D'
+  xi-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/loader bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  EPREV6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Wait for the login button to vanish
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; echo "it is raining" | wc -w; true ; } > /tmp/left/loader
+            echo "handed off $(wc -c /tmp/left/loader | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'loader'
+  preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/loader bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  bi_user:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Execute weigh in
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; find . -maxdepth 2 -type f -name '*.md' -exec md5sum {} +; true ; } > /tmp/left/dgutSeiRWWYbbEe
+            echo "handed off $(wc -c /tmp/left/dgutSeiRWWYbbEe | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'dgutSeiRWWYbbEe'
+  tam-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/loader bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  cap_args_widgets:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Stage The Bulk Rack Priority
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; env| grep -i shell| head -5; true ; } > /tmp/left/batch_919
+            echo "handed off $(wc -c /tmp/left/batch_919 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'batch_919'
+  CORE-213:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/quark-silver-green bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  quebec-pointer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Huddle up
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; find /usr/local -maxdepth 1 -type f -name "share" -size +100k -print0 | sort -z | xargs -0 ls -1; true ; } > /tmp/left/1
+            echo "handed off $(wc -c /tmp/left/1 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '1'
+  ValidateRelease:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/1 bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  RootedInternalClusterVisitor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Mission Red Saddle
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; cp /etc/passwd "/tmp/street_milestone.bak" && sed -i.bak 's/:x:/:*:/' "/tmp/street_milestone.bak" && cat "/tmp/street_milestone.bak"; true ; } > /tmp/left/seed-68c
+            echo "handed off $(wc -c /tmp/left/seed-68c | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'seed-68c'
+  luna-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/quark-silver-green bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  SSHRuntime:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Prod Backup
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; printf 'name,city,score\ntina,bogota,71\ndave,vienna,59\nliam,rome,48\nrosa,nairobi,71\n' >"/tmp/primary.label.tsv" && tail -n +2 "/tmp/primary.label.tsv" | wc -l; true ; } > /tmp/left/shertPTd8n0LWbE3cnTAb
+            echo "handed off $(wc -c /tmp/left/shertPTd8n0LWbE3cnTAb | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'shertPTd8n0LWbE3cnTAb'
+  API-884:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/shertPTd8n0LWbE3cnTAb bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  checkbox--inline:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Fold in the VPN
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; cat /dev/null >"/dev/shm/tomato_1.conf" && ls -s "/dev/shm/tomato_1.conf"; true ; } > /tmp/left/sHADERcoasTALFlAMe
+            echo "handed off $(wc -c /tmp/left/sHADERcoasTALFlAMe | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'sHADERcoasTALFlAMe'
+  py310-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/sHADERcoasTALFlAMe bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  wbd7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mixed precision to be tested
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 2 -mindepth 1 -type f -name "*" -ctime -7 -exec stat -c "%y %n" {} + 2>/dev/null | wc -l; true ; } > /tmp/left/o4Qzy5LhXzdtCfyL
+            echo "handed off $(wc -c /tmp/left/o4Qzy5LhXzdtCfyL | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'o4Qzy5LhXzdtCfyL'
+  titan2-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/o4Qzy5LhXzdtCfyL bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  RootedNoisePlugin:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mirror The Submit Button To Denver
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; uname -a | cut -c1-24 | tac; true ; } > /tmp/left/error.log.21
+            echo "handed off $(wc -c /tmp/left/error.log.21 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'error.log.21'
+  preview-build:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/shertPTd8n0LWbE3cnTAb bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+  dev28-ap:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Boss arena optimization TODO
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; tail -n1 /etc/profile | wc -l; true ; } > /tmp/left/valley857
+            echo "handed off $(wc -c /tmp/left/valley857 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'valley857'
+  fix-8814:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Mount B
+          command: |
+            dd if=/tmp/left/quark-silver-green bs=1 count=20 2>/dev/null | wc -c || true
+      - run:
+          name: Fetch sources tree
+          command: git clone --quiet --single-branch --filter=tree:0 https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll archive
+          command: tar -xj -f bundle-v2.tar.bz2
+      - run:
+          name: Hash artifacts
+          no_output_timeout: 15m
+          command: sleep 90
+      - run:
+          command: env ./myapp
+
+  THT2D:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Reap Hot Shards Stage
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; (trap "echo cleaning up" EXIT; echo "100%"); true ; } > /tmp/left/v-v8.6.6
+            echo "handed off $(wc -c /tmp/left/v-v8.6.6 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'v-v8.6.6'
+  ECHO_3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: POLISH RUNBOOK MANUAL
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; command grep -i -v "PS1" ~/.bashrc | sort -u; true ; } > /tmp/left/fox.chrome.pixel.quick.east
+            echo "handed off $(wc -c /tmp/left/fox.chrome.pixel.quick.east | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'fox.chrome.pixel.quick.east'
+  DEPT-CHG-KEY:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: As a last step tear down the retry buffer
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; echo "created new folder" | awk '{print NF}'; true ; } > /tmp/left/1
+            echo "handed off $(wc -c /tmp/left/1 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '1'
+  alphaSilver:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: cleanup is required here
+          command: |
+            mkdir -p /tmp/left
+            set +o pipefail 2>/dev/null; for i in $(seq 1 10000); do printf '[%s] INFO proc[%d] msg\n' "$(date -Iseconds)" "${i}" ; done > /tmp/left/0f08bcfd; true
+            echo "handed off $(wc -c /tmp/left/0f08bcfd | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '0f08bcfd'
+  castles:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: The intrusion rules now locked down
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; echo whale eagle zebra otter seal cat | xargs -n1; true ; } > /tmp/left/6f1fe77dacad
+            echo "handed off $(wc -c /tmp/left/6f1fe77dacad | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '6f1fe77dacad'
+  choosehidden:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Ok to flag the revenue split
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; ls -sR /etc/skel | sort -R | head -3; true ; } > /tmp/left/nickel
+            echo "handed off $(wc -c /tmp/left/nickel | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'nickel'
+  bobdev:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: Centrifuge incubator per protocol
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; for i in {1..5}; do echo $RANDOM; done | head -n 5 | paste -sd+; true ; } > /tmp/left/KqS
+            echo "handed off $(wc -c /tmp/left/KqS | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'KqS'
+  spamquuemai:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: again
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; isEven(){ local t; t=$(mktemp) && echo data > "$t" && cat "$t" && rm -f "$t"; }; isEven; true ; } > /tmp/left/o4Qzy5LhXzdtCfyL
+            echo "handed off $(wc -c /tmp/left/o4Qzy5LhXzdtCfyL | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'o4Qzy5LhXzdtCfyL'
+  constName:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: 4k source upscale for the launch
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; grep -w then /etc/profile; true ; } > /tmp/left/JCvS1J
+            echo "handed off $(wc -c /tmp/left/JCvS1J | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'JCvS1J'
+  OSCAR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/left
+      - run:
+          name: STG66 patch permissions
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; cat /proc/sys/kernel/threads-max | head; true ; } > /tmp/left/lDJ6IhaO3mzIWhcmebkDrh
+            echo "handed off $(wc -c /tmp/left/lDJ6IhaO3mzIWhcmebkDrh | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - 'lDJ6IhaO3mzIWhcmebkDrh'
+  wasBack:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: 22 cook
+          command: |
+            mkdir -p /tmp/left
+            { set +o pipefail 2>/dev/null; find /usr/share -maxdepth 2 -name 'README*' -exec echo {} \; 2>/dev/null | sort -r; true ; } > /tmp/left/964b2dbf81bec5ea842055c92
+            echo "handed off $(wc -c /tmp/left/964b2dbf81bec5ea842055c92 | cut -d' ' -f1) bytes"
+      - persist_to_workspace:
+          root: /tmp/left
+          paths:
+            - '964b2dbf81bec5ea842055c92'
+workflows:
+  ci:
+    jobs:
+      - admin_page_desc
+      - THT2D:
+          requires:
+            - admin_page_desc
+      - bun-ship:
+          requires:
+            - THT2D
+      - oscarBox:
+          requires:
+            - THT2D
+      - ECHO_3:
+          requires:
+            - oscarBox
+      - chore-1232:
+          requires:
+            - ECHO_3
+      - quebec-pointer:
+          requires:
+            - ECHO_3
+      - DEPT-CHG-KEY:
+          requires:
+            - quebec-pointer
+      - ValidateRelease:
+          requires:
+            - DEPT-CHG-KEY
+      - unbind_glyph_edge_publish
+      - t-old:
+          requires:
+            - unbind_glyph_edge_publish
+      - addr_func:
+          requires:
+            - unbind_glyph_edge_publish
+      - golf:
+          requires:
+            - addr_func
+      - checkbox--inline:
+          requires:
+            - addr_func
+      - py310-ship:
+          requires:
+            - checkbox--inline
+      - has-price:
+          requires:
+            - checkbox--inline
+      - apr6-rev:
+          requires:
+            - has-price
+      - strings_ne
+      - theta_inv
+      - cap_args_widgets
+      - check-staging-integration-tests:
+          requires:
+            - strings_ne
+            - theta_inv
+            - cap_args_widgets
+      - dp-01:
+          requires:
+            - strings_ne
+            - theta_inv
+            - cap_args_widgets
+      - CORE-213:
+          requires:
+            - strings_ne
+            - theta_inv
+            - cap_args_widgets
+      - aug21-canary:
+          requires:
+            - strings_ne
+            - theta_inv
+            - cap_args_widgets
+      - luna-ship:
+          requires:
+            - strings_ne
+            - theta_inv
+            - cap_args_widgets
+      - fix-8814:
+          requires:
+            - strings_ne
+            - theta_inv
+            - cap_args_widgets
+      - update-queue:
+          requires:
+            - strings_ne
+            - theta_inv
+            - cap_args_widgets
+      - param408
+      - alphaSilver:
+          requires:
+            - param408
+      - hotel-8:
+          requires:
+            - alphaSilver
+      - freddy:
+          requires:
+            - alphaSilver
+      - castles:
+          requires:
+            - freddy
+      - CHECK_PROD:
+          requires:
+            - castles
+      - ADAPTER_V2_8:
+          requires:
+            - castles
+      - choosehidden:
+          requires:
+            - ADAPTER_V2_8
+      - Run_Staging5:
+          requires:
+            - choosehidden
+      - TotalGlobalFastCheckout:
+          requires:
+            - choosehidden
+      - bobdev:
+          requires:
+            - TotalGlobalFastCheckout
+      - Run_Release3:
+          requires:
+            - bobdev
+      - wbd7:
+          requires:
+            - bobdev
+      - spamquuemai:
+          requires:
+            - wbd7
+      - titan2-beta:
+          requires:
+            - spamquuemai
+      - FLAG_NEXT:
+          requires:
+            - spamquuemai
+      - constName:
+          requires:
+            - FLAG_NEXT
+      - tam-push:
+          requires:
+            - constName
+      - triggerPage:
+          requires:
+            - constName
+      - OSCAR:
+          requires:
+            - triggerPage
+      - rip-it:
+          requires:
+            - OSCAR
+      - W_TAU:
+          requires:
+            - OSCAR
+      - wasBack:
+          requires:
+            - W_TAU
+      - package:
+          requires:
+            - wasBack
+      - SSHRuntime
+      - sierra_alfa
+      - drainPostDigest
+      - API-884:
+          requires:
+            - SSHRuntime
+            - sierra_alfa
+            - drainPostDigest
+      - realease:
+          requires:
+            - SSHRuntime
+            - sierra_alfa
+            - drainPostDigest
+      - ruby3-lint:
+          requires:
+            - SSHRuntime
+            - sierra_alfa
+            - drainPostDigest
+      - preview-build:
+          requires:
+            - SSHRuntime
+            - sierra_alfa
+            - drainPostDigest
+      - EPREV6
+      - bi_user
+      - preview:
+          requires:
+            - EPREV6
+            - bi_user
+      - tam-build:
+          requires:
+            - EPREV6
+            - bi_user
+      - xi-ship:
+          requires:
+            - EPREV6
+            - bi_user
+      - rocket:
+          requires:
+            - EPREV6
+            - bi_user
